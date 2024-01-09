@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -198,8 +198,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -210,8 +209,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -222,8 +220,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -255,8 +252,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -290,45 +286,47 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">List Pelanggaran</h1>
-        
+                    <h1 class="h3 mb-2 text-gray-800">Kategori Pelanggaran</h1>
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data hari ini [<?=date('d-m-Y')?>]</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data hari ini [
+                                <?= date('d-m-Y') ?>]
+                            </h6>
                         </div>
                         <div class="card-body">
+                            
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Kelas</th>
-                                            <th>Catatan</th>
                                             <th>Tipe Pelanggaran</th>
                                             <th>Point</th>
-                                            <th>Tanggal Dilaporkan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                    <?php
-                                    include "koneksi.php";
-                                    $query = mysqli_query($koneksi, "SELECT * FROM list_pelanggaran JOIN kat_pelanggaran ON list_pelanggaran.id_kat = kat_pelanggaran.id_kat
+                                        <tr>
+                                            <?php
+                                            include "koneksi.php";
+                                            $query = mysqli_query($koneksi, "SELECT * FROM list_pelanggaran JOIN kat_pelanggaran ON list_pelanggaran.id_kat = kat_pelanggaran.id_kat
                                                                                                     JOIN data_siswa ON list_pelanggaran.id_siswa = data_siswa.id_siswa");
-                                    $no = 1;
-                                    while ($data = mysqli_fetch_array($query)){
-                                    ?>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $data['nama_siswa'] ?></td>
-                                        <td><?= $data['kelas'] ?></td>
-                                        <td><?= $data['catatan'] ?></td>
-                                        <td><?= $data['tipe_pelanggaran'] ?></td>
-                                        <td><?= $data['point'] ?></td>
-                                        <td><?= $data['tanggal'] ?></td>
-                                    </tr>
-                                    <?php } ?>
+                                            $no = 1;
+                                            while ($data = mysqli_fetch_array($query)) {
+                                                ?>
+                                                <td>
+                                                    <?= $no++ ?>
+                                                </td>
+                                                <td>
+                                                    <?= $data['tipe_pelanggaran'] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $data['point'] ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -401,6 +399,7 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+
 
 </body>
 

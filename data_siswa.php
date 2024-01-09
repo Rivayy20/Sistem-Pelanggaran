@@ -11,6 +11,7 @@
 
     <title>SMKN 2 Magelang</title>
 
+
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -290,7 +291,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">List Pelanggaran</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Data Siswa</h1>
         
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -303,12 +304,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>NIS</th>
                                             <th>Nama</th>
                                             <th>Kelas</th>
-                                            <th>Catatan</th>
-                                            <th>Tipe Pelanggaran</th>
-                                            <th>Point</th>
-                                            <th>Tanggal Dilaporkan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -321,12 +319,9 @@
                                     while ($data = mysqli_fetch_array($query)){
                                     ?>
                                         <td><?= $no++ ?></td>
+                                        <td><?= $data['nis'] ?></td>
                                         <td><?= $data['nama_siswa'] ?></td>
                                         <td><?= $data['kelas'] ?></td>
-                                        <td><?= $data['catatan'] ?></td>
-                                        <td><?= $data['tipe_pelanggaran'] ?></td>
-                                        <td><?= $data['point'] ?></td>
-                                        <td><?= $data['tanggal'] ?></td>
                                     </tr>
                                     <?php } ?>
                                     </tbody>
@@ -392,8 +387,8 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+     <!-- Page level plugins -->
+     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
