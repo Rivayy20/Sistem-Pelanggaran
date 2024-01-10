@@ -11,6 +11,8 @@
 
     <title>SMKN 2 Magelang</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -299,6 +301,121 @@
                             <h6 class="m-0 font-weight-bold text-primary">Data hari ini [<?=date('d-m-Y')?>]</h6>
                         </div>
                         <div class="card-body">
+
+                             <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        + Tambah Data Siswa
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Data Siswa</h1>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                <div class="mb-3">
+                                    <label class="form-label">NIS</label>
+                                    <input type="text" class="form-control" name="nis">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Siswa</label>
+                                    <input type="text" class="form-control" name="nama_siswa">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Kelas</label>
+                                    <input type="option" class="form-control" name="kelas">
+                                </div>
+                                <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" name="bsimpan">Simpan</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                </div>
+                                </form>
+
+                                <?php
+                                if(isset($_POST['bsimpan'])){
+                                    include "koneksi.php";
+                                    $nis = $_POST['nis'];
+                                    $nama_siswa = $_POST['nama_siswa'];
+                                    $kelas = $_POST['kelas'];
+
+                                    $simpan = mysqli_query($koneksi, "INSERT INTO data_siswa VALUES('', '$nis', '$nama_siswa', '$kelas')");
+                                }
+                                ?>
+
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalList">
+                        + Laporkan Pelanggaran
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">List Pelanggaran Siswa</h1>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                <div class="mb-3">
+                                <label class="form-label">Nama Siswa</label>
+                                <select class="form-select" name="nama_siswa" aria-label="Default select example">
+                                    <?php
+                                    $no = 1;
+                                    include "koneksi.php";
+                                    $hasil = mysqli_query($koneksi, "SELECT * FROM data_siswa");
+                                    while ($row1 = mysqli_fetch_assoc($hasil)) { ?>
+                                    <option value="<?=$row1['id_siswa']?>">
+                                    <?=$row1['nama_siswa']?> <br> |
+                                    <?=$row1['kelas']?>
+                                    </option> <?php } ?>
+                                </select>
+                                </div>
+                                <div class="mb-3">
+                                <label class="form-label">Tanggal Laporan</label>
+                                <input type="date" class="form-control" name="tanggal">
+                                </div>
+                                <div class="mb-3>
+                                <label class="form-label">Tipe Pelanggaran</label>
+                                <select class="form-select" name="nama_siswa" aria-label="Default select example">
+                                    <?php
+                                    $no = 1;
+                                    include "koneksi.php";
+                                    $hasil = mysqli_query($koneksi, "SELECT * FROM kat_pelanggaran");
+                                    while ($row1 = mysqli_fetch_assoc($hasil)) { ?>
+                                    <option value="<?=$row1['id_kat']?>">
+                                    <?=$row1['tipe_pelanggaran']?> 
+                                    </option> <?php } ?>
+                                </select>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" name="bsimpan1">Simpan</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                </div>
+                                </form>
+
+                                <?php
+                                if(isset($_POST['bsimpan1'])){
+                                    include "koneksi.php";
+                                    $id_list = $_POST['id_list'];
+                                    $tanggal = $_POST['tanggal'];
+                                    $id_kat = $_POST['id_kat'];
+                                    $id_siswa = $_POST['id_siswa'];
+
+                                    $simpan = "INSERT INTO `list_pelanggaran` (`id_list`, `tanggal`, `id_kat`, `id_siswa`) VALUES (NULL, '$tanggal', '$id_kat', '$id_siswa'); ";
+                                }
+                                ?>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -307,14 +424,14 @@
                                             <th>NIS</th>
                                             <th>Nama</th>
                                             <th>Kelas</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                     <?php
                                     include "koneksi.php";
-                                    $query = mysqli_query($koneksi, "SELECT * FROM list_pelanggaran JOIN kat_pelanggaran ON list_pelanggaran.id_kat = kat_pelanggaran.id_kat
-                                                                                                    JOIN data_siswa ON list_pelanggaran.id_siswa = data_siswa.id_siswa");
+                                    $query = mysqli_query($koneksi, "SELECT * FROM data_siswa");
                                     $no = 1;
                                     while ($data = mysqli_fetch_array($query)){
                                     ?>
@@ -322,6 +439,9 @@
                                         <td><?= $data['nis'] ?></td>
                                         <td><?= $data['nama_siswa'] ?></td>
                                         <td><?= $data['kelas'] ?></td>
+                                        <td>
+                                            <a href="hapusdatsis.php?id_siswa=<?php echo $data ['id_siswa']; ?>" class="btn btn-danger">Hapus</a>
+                                        </td>
                                     </tr>
                                     <?php } ?>
                                     </tbody>
@@ -396,6 +516,8 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 

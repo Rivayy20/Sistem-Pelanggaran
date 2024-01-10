@@ -11,6 +11,8 @@
 
     <title>SMKN 2 Magelang</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -298,6 +300,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">Data hari ini [<?=date('d-m-Y')?>]</h6>
                         </div>
                         <div class="card-body">
+                            
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -305,7 +308,6 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Kelas</th>
-                                            <th>Catatan</th>
                                             <th>Tipe Pelanggaran</th>
                                             <th>Point</th>
                                             <th>Tanggal Dilaporkan</th>
@@ -323,7 +325,6 @@
                                         <td><?= $no++ ?></td>
                                         <td><?= $data['nama_siswa'] ?></td>
                                         <td><?= $data['kelas'] ?></td>
-                                        <td><?= $data['catatan'] ?></td>
                                         <td><?= $data['tipe_pelanggaran'] ?></td>
                                         <td><?= $data['point'] ?></td>
                                         <td><?= $data['tanggal'] ?></td>
@@ -401,6 +402,8 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 

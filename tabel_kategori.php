@@ -11,6 +11,8 @@
 
     <title>SMKN 2 Magelang</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -296,8 +298,47 @@
                             </h6>
                         </div>
                         <div class="card-body">
-                            
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        + Tambah Kategori Pelanggaran
+                        </button>
 
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Kategori Pelanggaran</h1>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                <div class="mb-3">
+                                    <label class="form-label">Tipe Pelanggaran</label>
+                                    <input type="text" class="form-control" name="tipe_pelanggaran">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Point</label>
+                                    <input type="text" class="form-control" name="point">
+                                </div>
+                                <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" name="bsimpan">Simpan</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                                </div>
+                                </form>
+
+                                <?php
+                                if(isset($_POST['bsimpan'])){
+                                    include "koneksi.php";
+                                    $tipe_pelanggaran = $_POST['tipe_pelanggaran'];
+                                    $point = $_POST['point'];
+
+                                    $simpan = mysqli_query($koneksi, "INSERT INTO kat_pelanggaran VALUES('', '$tipe_pelanggaran', '$point')");
+                                }
+                                ?>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -305,14 +346,14 @@
                                             <th>No</th>
                                             <th>Tipe Pelanggaran</th>
                                             <th>Point</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <?php
                                             include "koneksi.php";
-                                            $query = mysqli_query($koneksi, "SELECT * FROM list_pelanggaran JOIN kat_pelanggaran ON list_pelanggaran.id_kat = kat_pelanggaran.id_kat
-                                                                                                    JOIN data_siswa ON list_pelanggaran.id_siswa = data_siswa.id_siswa");
+                                            $query = mysqli_query($koneksi, "SELECT * FROM kat_pelanggaran");
                                             $no = 1;
                                             while ($data = mysqli_fetch_array($query)) {
                                                 ?>
@@ -324,6 +365,9 @@
                                                 </td>
                                                 <td>
                                                     <?= $data['point'] ?>
+                                                </td>
+                                                <td>
+                                                    <a href="hapuskat.php?id_kat=<?php echo $data ['id_kat']; ?>" class="btn btn-danger">Hapus</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -400,6 +444,7 @@
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="js/demo/datatables-demo.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 
